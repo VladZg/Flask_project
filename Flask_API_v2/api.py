@@ -4,7 +4,7 @@ from flask_restful import Resource, Api, reqparse, abort
 app = Flask(__name__)
 api = Api(app)
 
-STORE = [
+store = [
     {
         'name': 'item1',
         'price': 1500
@@ -23,59 +23,64 @@ STORE = [
     }
 ]
 
-
 parser = reqparse.RequestParser()
 
 
-def filter(name):
-    if name not in list([item['name'] for item in STORE]):
+def abort_if_item_doesnt_exist(name):
+    if not list(filter(lambda x: x['name'] == name, store)):
         abort(404, message="Item '{}' doesn't exist".format(name))
 
 
-class Item(Resource):
+def abort_if_item_exists(name):
+    if list(filter(lambda x: x['name'] == name, store)):
+        abort(404, message="Item '{}' have already exist".format(name))
 
+
+class Item(Resource):
     parser.add_argument('price')
 
     def get(self, name):
-        filter(name)
-        return STORE[name]
+        abort_if_item_doesnt_exist(name)
+        return list(filter(lambda x: x['name'] == name, store))[0]
 
     def post(self, name):
-        if name in list([item['name'] for item in STORE]):
-            abort(404, message="Item '{}' have already exist".format(name))
+        abort_if_item_exists(name)
         new_item = {'name': name,
                     'price': parser.parse_args()['price']}
-        STORE.append(new_item)
+        store.append(new_item)
         return new_item, 201
 
     def put(self, name):
-        for i in range(len(STORE)):
-            if STORE[i]['name'] == name:
-                STORE[i]['price'] = parser.parse_args()['price']
-                return STORE[i], 201
+        item = list(filter(lambda x: x['name'] == name, store))
+        if item:
+            item[0]['price'] = parser.parse_args()['price']
+            return item[0], 201
         new_item = {'name': name,
                     'price': parser.parse_args()['price']}
-        STORE.append(new_item)
+        store.append(new_item)
         return new_item, 201
 
     def delete(self, name):
-        filter(name)
-        for i in range(len(STORE)):
-            if STORE[i]['name'] == name:
-                del STORE[i]
-                return '', 204
+        if list(filter(lambda x: x['name'] == name, store)):
+            abort(404, message="Item '{}' have already exist".format(name))
+        store.remove(list(filter(lambda x: x['name'] == name, store))[0])
+        return '', 204
 
 
 class ItemList(Resource):
-    parser.add_argument('name')
-    parser.add_argument('price')
+    parser.add_argument('items', type=dict, action='append')
 
     def get(self):
-        return STORE
+        return {'items': store}
 
     def post(self):
-        pass
-        return 201
+        new_items = []
+        for item in parser.parse_args()['items']:
+            abort_if_item_exists(item['name'])
+        for item in parser.parse_args()['items']:
+            store.append(item)
+            new_items.append(item)
+        return {'new_items': new_items}, 201
 
 
 api.add_resource(Item, '/items/<string:name>')
