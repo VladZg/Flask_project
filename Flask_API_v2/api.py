@@ -61,8 +61,7 @@ class Item(Resource):
         return new_item, 201
 
     def delete(self, name):
-        if list(filter(lambda x: x['name'] == name, store)):
-            abort(404, message="Item '{}' have already exist".format(name))
+        abort_if_item_doesnt_exist(name)
         store.remove(list(filter(lambda x: x['name'] == name, store))[0])
         return '', 204
 
