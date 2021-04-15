@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask
 from flask_restful import Resource, Api, reqparse, abort
 
 app = Flask(__name__)
@@ -23,8 +23,6 @@ store = [
     }
 ]
 
-parser = reqparse.RequestParser()
-
 
 def abort_if_item_doesnt_exist(name):
     if not list(filter(lambda x: x['name'] == name, store)):
@@ -37,46 +35,54 @@ def abort_if_item_exists(name):
 
 
 class Item(Resource):
+    parser = reqparse.RequestParser()
     parser.add_argument('price')
 
-    def get(self, name):
+    @staticmethod
+    def get(name):
         abort_if_item_doesnt_exist(name)
         return list(filter(lambda x: x['name'] == name, store))[0]
 
-    def post(self, name):
+    @staticmethod
+    def post(name):
         abort_if_item_exists(name)
         new_item = {'name': name,
-                    'price': parser.parse_args()['price']}
+                    'price': Item.parser.parse_args()['price']}
         store.append(new_item)
         return new_item, 201
 
-    def put(self, name):
+    @staticmethod
+    def put(name):
         item = list(filter(lambda x: x['name'] == name, store))
         if item:
-            item[0]['price'] = parser.parse_args()['price']
+            item[0]['price'] = Item.parser.parse_args()['price']
             return item[0], 201
         new_item = {'name': name,
-                    'price': parser.parse_args()['price']}
+                    'price': Item.parser.parse_args()['price']}
         store.append(new_item)
         return new_item, 201
 
-    def delete(self, name):
+    @staticmethod
+    def delete(name):
         abort_if_item_doesnt_exist(name)
         store.remove(list(filter(lambda x: x['name'] == name, store))[0])
         return '', 204
 
 
 class ItemList(Resource):
+    parser = reqparse.RequestParser()
     parser.add_argument('items', type=dict, action='append')
 
-    def get(self):
+    @staticmethod
+    def get():
         return {'items': store}
 
-    def post(self):
+    @staticmethod
+    def post():
         new_items = []
-        for item in parser.parse_args()['items']:
+        for item in Item.parser.parse_args()['items']:
             abort_if_item_exists(item['name'])
-        for item in parser.parse_args()['items']:
+        for item in Item.parser.parse_args()['items']:
             store.append(item)
             new_items.append(item)
         return {'new_items': new_items}, 201
