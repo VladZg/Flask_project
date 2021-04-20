@@ -1,5 +1,16 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, abort
 import sqlite3
+
+
+def does_user_exist(username):
+    if User.find_by_username(username) is not None:
+        return True
+    return False
+
+
+def abort_if_user_doesnt_exist(username):
+    if not does_user_exist(username):
+        return abort(404, message="User '{}' doesn't exist".format(username))
 
 
 class User:
@@ -56,10 +67,47 @@ class UserRegister(Resource):
     def post():
         username = UserRegister.parser.parse_args()['username']
         password = UserRegister.parser.parse_args()['password']
+        if (str(username) != 'None') and (str(password) != 'None'):
+            if does_user_exist(username):
+                connection = sqlite3.connect('data.db')
+                cursor = connection.cursor()
+                query = 'INSERT INTO users VALUES (NULL, ?, ?)'
+                cursor.execute(query, (username, password))
+                connection.commit()
+                connection.close()
+                return {'username': username, 'password': password}
+            return abort(404, message="User '{}' have already exist".format(username))
+        return abort(404, message='A wrong format of body request. Use {"username": string, "password": string}')
+
+    @staticmethod
+    # @jwt_required()
+    def put():
+        new_user = {'username': UserRegister.parser.parse_args()['username'],
+                    'password': UserRegister.parser.parse_args()['password']}
+        if (str(new_user['username']) != 'None') and (str(new_user['password']) != 'None'):
+            connection = sqlite3.connect('data.db')
+            cursor = connection.cursor()
+            if does_user_exist(username):
+                query = 'UPDATE users SET password=? WHERE username=?'
+                cursor.execute(query, (new_item['username'], new_user['password']))
+                connection.commit()
+                connection.close()
+                return new_user, 201
+            query = 'INSERT INTO users VALUES (NULL, ?, ?)'
+            cursor.execute(query, (new_user['username'], new_user['password']))
+            connection.commit()
+            connection.close()
+            return new_user, 201
+        return abort(404, message='A wrong format of body request. Use {"username": string, "password": string}')
+
+    @staticmethod
+    # @jwt_required()
+    def delete():
+        abort_if_user_doesnt_exist(username)
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
-        query = 'INSERT INTO users VALUES (NULL, ?, ?)'
-        cursor.execute(query, (username, password))
+        query = 'DELETE FROM users WHERE username=?'
+        item = cursor.execute(query, (username,))
         connection.commit()
         connection.close()
-        return {'username': username, 'password': password}
+        return '', 204
