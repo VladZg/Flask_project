@@ -7,19 +7,19 @@ api = Api(app)
 store = [
     {
         'name': 'item1',
-        'price': 1500
+        'price': '1500'
     },
     {
         'name': 'item2',
-        'price': 2000
+        'price': '2000'
     },
     {
         'name': 'item3',
-        'price': 777
+        'price': '777'
     },
     {
         'name': 'item4',
-        'price': 3699
+        'price': '3699'
     }
 ]
 
