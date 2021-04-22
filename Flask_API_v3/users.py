@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, abort
 import sqlite3
+from flask_jwt import jwt_required
 
 
 def does_user_exist(username):
@@ -26,25 +27,19 @@ class User:
     def find_by_username(name):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
-
         query = 'SELECT * FROM users WHERE username=?'
         row = cursor.execute(query, (name,)).fetchone()
-
         connection.close()
-
         user = User(*row) if row else None
         return user
 
     @staticmethod
     def find_by_id(_id):
         connection = sqlite3.connect('data.db')
-        cursor = con.cursor()
-
+        cursor = connection.cursor()
         query = 'SELECT * FROM users WHERE id=?'
         row = cursor.execute(query, (_id,)).fetchone()
-
         connection.close()
-
         user = User(*row) if row else None
         return user
 
@@ -55,10 +50,12 @@ class UserRegister(Resource):
     parser.add_argument('password')
 
     @staticmethod
+    @jwt_required()
     def get():
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
         query = 'SELECT username, password FROM users'
+        print(cursor.execute(query))
         users = [{'username': row[0], 'password': row[1]} for row in cursor.execute(query)]
         connection.close()
         return {'users': users}
@@ -67,42 +64,39 @@ class UserRegister(Resource):
     def post():
         username = UserRegister.parser.parse_args()['username']
         password = UserRegister.parser.parse_args()['password']
-        if (str(username) != 'None') and (str(password) != 'None'):
-            if does_user_exist(username):
-                connection = sqlite3.connect('data.db')
-                cursor = connection.cursor()
-                query = 'INSERT INTO users VALUES (NULL, ?, ?)'
-                cursor.execute(query, (username, password))
-                connection.commit()
-                connection.close()
-                return {'username': username, 'password': password}
-            return abort(404, message="User '{}' have already exist".format(username))
-        return abort(404, message='A wrong format of body request. Use {"username": string, "password": string}')
+        if not does_user_exist(username):
+            connection = sqlite3.connect('data.db')
+            cursor = connection.cursor()
+            query = 'INSERT INTO users VALUES (NULL, ?, ?)'
+            cursor.execute(query, (username, password))
+            connection.commit()
+            connection.close()
+            return {'username': username, 'password': password}
+        return abort(404, message="User '{}' have already exist".format(username))
 
     @staticmethod
-    # @jwt_required()
+    @jwt_required()
     def put():
         new_user = {'username': UserRegister.parser.parse_args()['username'],
                     'password': UserRegister.parser.parse_args()['password']}
-        if (str(new_user['username']) != 'None') and (str(new_user['password']) != 'None'):
-            connection = sqlite3.connect('data.db')
-            cursor = connection.cursor()
-            if does_user_exist(username):
-                query = 'UPDATE users SET password=? WHERE username=?'
-                cursor.execute(query, (new_item['username'], new_user['password']))
-                connection.commit()
-                connection.close()
-                return new_user, 201
-            query = 'INSERT INTO users VALUES (NULL, ?, ?)'
-            cursor.execute(query, (new_user['username'], new_user['password']))
+        connection = sqlite3.connect('data.db')
+        cursor = connection.cursor()
+        if does_user_exist(new_user['username']):
+            query = 'UPDATE users SET password = ? WHERE username=?'
+            cursor.execute(query, (new_user['password'], new_user['username']))
             connection.commit()
             connection.close()
             return new_user, 201
-        return abort(404, message='A wrong format of body request. Use {"username": string, "password": string}')
+        query = 'INSERT INTO users VALUES (NULL, ?, ?)'
+        cursor.execute(query, (new_user['username'], new_user['password']))
+        connection.commit()
+        connection.close()
+        return new_user, 201
 
     @staticmethod
-    # @jwt_required()
+    @jwt_required()
     def delete():
+        username = UserRegister.parser.parse_args()['username']
         abort_if_user_doesnt_exist(username)
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
