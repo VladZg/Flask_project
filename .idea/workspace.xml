@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1033db21-2a7e-468a-b42d-71fbb5ab5abc" name="Default Changelist" comment="commit #10">
+    <list default="true" id="1033db21-2a7e-468a-b42d-71fbb5ab5abc" name="Default Changelist" comment="commit #11">
+      <change afterPath="$PROJECT_DIR$/Flask_API_v4/.idea/Flask_API_v2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API_v3/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API_v3/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask_API_v3/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API_v3/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API_v3/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask_API_v3/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask_API_v3/users.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +31,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1qEoFZCuIEwmoY3vJtzwaIJK8IM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,8 +47,13 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Python.api (1)">
-    <configuration name="api (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.api (4)">
+    <configuration name="api (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Flask_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -71,7 +74,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="api (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="api (3)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Flask_project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -79,11 +82,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python3.8" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v2/With authorization" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v4" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v2/With authorization/api.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v4/api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="api (4)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Flask_project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v4/v4.1" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v4/v4.1/api.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -121,32 +145,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python3.8" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v4" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v3/create_tables.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="items" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Flask_project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v3" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v3/items.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v4/create_tables.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,11 +166,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python3.8" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Flask_API_v4" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v3/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Flask_API_v4/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -178,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.api (1)" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.items" />
-        <item itemvalue="Python.create_tables" />
+        <item itemvalue="Python.api (4)" />
+        <item itemvalue="Python.api (3)" />
         <item itemvalue="Python.api (2)" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.create_tables" />
       </list>
     </recent_temporary>
   </component>
@@ -216,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619092449248</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit #11">
+      <created>1619120524040</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619120524040</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -239,6 +249,7 @@
     <MESSAGE value="commit #8" />
     <MESSAGE value="commit #9" />
     <MESSAGE value="commit #10" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit #10" />
+    <MESSAGE value="commit #11" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit #11" />
   </component>
 </project>
